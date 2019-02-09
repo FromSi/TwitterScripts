@@ -20,7 +20,7 @@ const timeHour = 8;      		// Сколько часов будем это кру
 const amountLikes = 500;   		// Сколько всего лайков нужно?
 
 // Перевожу в часы и узнаю задержку в секундах;
-var hostPause = ((timeHour * 60 * 60) / amountLikes) ^ 0;
+var hostPause = (((timeHour * 60 * 60) / amountLikes) ^ 0) * 1000;
 
 // Просто паузы, чтобы успевало все подгрузится.
 var loadTweetPause = 5000;
