@@ -17,10 +17,10 @@ const MAX_TWEETS = 100;		// Макс твиттов на ленте
 
 // Сколько лайков и за какое время. 
 const timeHour = 8;      		// Сколько часов будем это крутить?
-const countLike = 500;   		// Сколько всего лайков нужно?
+const amountLikes = 500;   		// Сколько всего лайков нужно?
 
 // Перевожу в часы и узнаю задержку в секундах;
-var hostPause = ((timeHour * 60 * 60) / countLike) ^ 0;
+var hostPause = ((timeHour * 60 * 60) / amountLikes) ^ 0;
 
 // Просто паузы, чтобы успевало все подгрузится.
 var loadTweetPause = 5000;
@@ -28,15 +28,19 @@ var handlerTweetPause = 5000;
 
 // Счетчик твиттов. Помогает вычислить количество твиттов для MAX_TWEETS.
 var countTweets;
+// Счетчик лайков. Помогает вычислить количество лайков для amountLikes.
+var countLikes = 0;
 
 host();
 
 // Избегаем рефлексию. :D
 function host(){
-    setTimeout(
-        () => main(), 
-        hostPause
-    );
+	if (amountLikes > countLikes){
+		setTimeout(
+        	() => main(), 
+        	hostPause
+    	);
+	}
 }
 
 // Нажимает на кнопку, для обновления твиттов и начинает их обрабатывать.
@@ -120,6 +124,7 @@ function getRandomInt(min, max) {
 
 // Поставить лайк счастливчику.
 function clickLike(arr){
+	countLikes++;
 	arr[getRandomInt(0, arr.length)].getElementsByClassName(CLASS_BUTTON_LIKE)[0].click();
 }
 
